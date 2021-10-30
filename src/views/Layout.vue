@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="layout">
     <header>
       <h1>Menú <span>de hamburguesas</span></h1>
     </header>
@@ -34,12 +34,13 @@
         <WidgetCard
           v-bind:id="burger.id"
           v-bind:nombre="burger.nombre"
-          v-bind:ingredientes="burger.ingredientes"
+          v-bind:ingredientes="burger.ingredientes.join(',')"
           v-bind:calorias="burger.calorias"
           v-bind:url="burger.url"
           v-bind:precio="burger.precio"
           @updateBurger="updateBurger"
           @deleteBurger="deleteBurger"
+          @getHamburgesa="getHamburgesa"
         />
       </div>
     </div>
@@ -78,7 +79,6 @@
                   aria-describedby="burgerName"
                   v-model="formCreateBurger.nombre"
                 />
-                <p>{{ formCreateBurger.nombre }}</p>
               </div>
               <div class="form-group">
                 <label for="burgerIngredients">Ingredientes</label>
@@ -249,12 +249,12 @@ export default {
   box-sizing: border-box;
 }
 
-.body {
+.layout {
   /*     background : rgb(236, 109, 5); */
   box-sizing: border-box;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   position: relative;
-  min-width: 320px;
+  height: 100vh;
   background: rgb(236, 109, 0);
   background: linear-gradient(
     153deg,
@@ -278,10 +278,10 @@ h1 {
 }
 
 .widget-card {
+  min-height: 400px;
   border-radius: 8px;
   background-color: #ffffff;
   width: 220px;
-  min-height: 170px;
   padding: 24px 16px;
   box-shadow: 0 1px 4px 0 rgba(14, 21, 32, 0.18);
   margin: 24px;
@@ -305,8 +305,9 @@ h1 {
   margin: 0;
 }
 
-.widget-card-header p span {
+.widget-card-header > p span {
   font-size: 12px;
+  white-space: nowrap;
 }
 
 .widget-card-body {
@@ -344,7 +345,7 @@ h1 {
 .btn-new-burger {
   font-size: 20px;
   position: fixed;
-  top: 40px;
+  top: 28px;
   left: 0;
 }
 
@@ -391,7 +392,7 @@ form {
   text-align: left;
 }
 @media (max-width: 680px) {
-  .body {
+  .layout {
     background: rgb(213, 235, 18);
   }
 
@@ -408,6 +409,7 @@ form {
 
   .widget-card {
     width: 100%;
+    min-height: 0;
     margin: 8px 0;
   }
 
@@ -428,7 +430,8 @@ form {
     margin-bottom: 4px;
   }
 
-  .widget-card-body {
+  .container > div {
+    width: 100%;
   }
 }
 </style>

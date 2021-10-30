@@ -3,7 +3,7 @@
     <div class="widget-card">
       <div class="widget-card-header">
         <p>
-          Combo #9 <span>( {{ calorias }} cal)</span>
+          Combo #{{ id }} <span>( {{ calorias }} cal)</span>
         </p>
       </div>
       <div class="widget-card-body">
@@ -65,10 +65,10 @@
           <p>Seguro que quiere eliminar esta hamburgesa del Menú? :O</p>
           <div class="d-flex justify-content-end">
             <button
-              id="close-delete-modal"
               type="button"
               class="btn btn-secondary mx-2"
               data-dismiss="modal"
+              :id="'close-delete-modal' + id"
             >
               Cancelar
             </button>
@@ -162,16 +162,17 @@
             </div>
             <div class="d-flex justify-content-end">
               <button
-                id="close-update-modal"
                 type="button"
                 class="btn btn-secondary mx-2"
                 data-dismiss="modal"
+                :id="'close-edit-modal' + id"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 class="btn btn-primary mx-2"
+                data-dismiss="modal"
                 v-on:click="editBurger()"
               >
                 Editar
@@ -221,17 +222,17 @@ export default {
     emitUpdateBurger(burger) {
       this.$emit("updateBurger", burger);
     },
+    emitGetBurger(burger) {
+      this.$emit("getHamburgesa", burger);
+    },
     loadForm() {
       this.formBurger.id = this.id;
       this.formBurger.nombre = this.nombre;
-      this.formBurger.ingredientes = [...this.ingredientes].join(",");
+      this.formBurger.ingredientes = [...this.ingredientes].split(",");
       this.formBurger.calorias = this.calorias;
       this.formBurger.url = this.url;
       this.formBurger.precio = this.precio;
       console.log("hola");
-      setTimeout(() => {
-        this.$forceUpdate();
-      }, 2000);
     },
     putHamburgesa(hamburgesa) {
       const data = { ...hamburgesa };
@@ -243,8 +244,10 @@ export default {
         )
         .then(
           () => {
-            document.getElementById("close-update-modal").click();
+            document.getElementById(`close-edit-modal${hamburgesa.id}`).click();
+            this.emitGetBurger();
             this.emitUpdateBurger(data);
+            this.emitBurger(data);
             /* this.burgers = this.burgers.map((e) => {
               if (e.id === response.id) {
                 e = response;
@@ -260,9 +263,9 @@ export default {
         .delete(`https://prueba-hamburguesas.herokuapp.com/burger/${id}`)
         .then(
           () => {
-            document.getElementById("close-delete-modal").click();
+            this.emitGetBurger();
+            document.getElementById(`close-delete-modal${id}`).click();
             this.$emit("deleteBurger", id);
-            this.getHamburgesa();
           },
           (err) => console.log(err)
         );
