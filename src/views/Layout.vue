@@ -324,11 +324,13 @@ h1 {
   margin-top: 8px;
   padding: 8px;
   width: 100%;
-  -webkit-line-clamp: 2 !important;
-  -webkit-box-orient: vertical !important;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.widget-card-body .burger-ingredients:hover {
+  overflow: none;
+  white-space: inherit;
 }
 
 .f-bold {
