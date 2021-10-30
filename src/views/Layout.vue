@@ -254,7 +254,6 @@ export default {
   box-sizing: border-box;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   position: relative;
-  height: 100vh;
   background: rgb(236, 109, 0);
   background: linear-gradient(
     153deg,
