@@ -297,15 +297,14 @@ h1 {
   margin-bottom: 0;
 }
 
-.widget-card-header p {
-  text-align: center;
+.widget-card-header .burger-title {
   font-size: 24px;
   font-weight: bold;
+  text-transform: uppercase;
   margin: 0;
 }
-
-.widget-card-header > p span {
-  font-size: 12px;
+.widget-card-header .burger-subtitle {
+  font-size: 16px;
   white-space: nowrap;
 }
 
@@ -321,20 +320,15 @@ h1 {
   height: 100px;
 }
 
-.widget-card-body ul {
-  list-style: none;
-  padding: 0;
-}
-
-.widget-card-body ul li {
-  margin-right: 8px;
-  display: inline-block;
-}
-
-.burger-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 16px 0 0 0;
+.widget-card-body .burger-ingredients {
+  margin-top: 8px;
+  padding: 8px;
+  width: 100%;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .f-bold {

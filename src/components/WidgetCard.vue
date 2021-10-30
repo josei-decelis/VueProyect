@@ -2,20 +2,14 @@
   <div>
     <div class="widget-card">
       <div class="widget-card-header">
-        <p>
-          Combo #{{ id }} <span>( {{ calorias }} cal)</span>
+        <p class="burger-title">
+          {{ nombre }}
         </p>
+        <p class="burger-subtitle">{{ calorias }} cal</p>
       </div>
       <div class="widget-card-body">
-        <p class="burger-title">{{ nombre }}</p>
         <img v-bind:src="url" alt="imagen referencial combo {{id}}" />
-        <!--  <ul>
-          <li class="f-bold">Ingredientes:</li>
-          <li>Palta</li>
-          <li>Tomate</li>
-          <li>Mayo</li>
-        </ul> -->
-        <p>{{ ingredientes }}</p>
+        <p class="burger-ingredients">{{ ingredientes }}</p>
       </div>
       <p class="f-bold price">Precio: {{ precio }}</p>
       <div class="widget-card-footer">
@@ -120,7 +114,6 @@
                 v-model="formBurger.nombre"
               />
               <p>{{ formBurger.nombre }}</p>
-              <!--   v-model="burger.editionValue.nombre" -->
             </div>
             <div class="form-group">
               <label for="burgerIngredients">Ingredientes</label>
@@ -202,7 +195,7 @@ export default {
         id: 0,
         nombre: "",
         ingredientes: "",
-        calorias: 2,
+        calorias: 0,
         url: "",
         precio: 0,
       },
@@ -232,7 +225,6 @@ export default {
       this.formBurger.calorias = this.calorias;
       this.formBurger.url = this.url;
       this.formBurger.precio = this.precio;
-      console.log("hola");
     },
     putHamburgesa(hamburgesa) {
       const data = { ...hamburgesa };
